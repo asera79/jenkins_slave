@@ -9,7 +9,7 @@ ADD docker-entrypoint.sh /usr/local/bin
 
 RUN apk update && apk add --no-cache ca-certificates && \
     set -ex && \
-    apk add --no-cache --virtual .fetch-deps curl tar openssh && \
+    apk add --no-cache --virtual .fetch-deps curl tar && \
     cd /tmp && \
     curl -fL -o docker.tgz "https://download.docker.com/linux/static/${DOCKER_CHANNEL}/x86_64/docker-${DOCKER_VERSION}.tgz" && \
     tar xzvf docker.tgz && mv ./docker /usr/lib/docker && \
@@ -17,6 +17,8 @@ RUN apk update && apk add --no-cache ca-certificates && \
     rm -rf /tmp/* && \
     rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 
+RUN apk add openssh sudo
+
 EXPOSE 22
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["/usr/sbin/sshd","-D"]
+CMD ["/usr/sbin/sshd","-d"]
