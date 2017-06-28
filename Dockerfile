@@ -21,4 +21,4 @@ RUN apk add openssh sudo
 
 EXPOSE 22
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["/usr/sbin/sshd","-d"]
+CMD ["/usr/sbin/sshd","-D"]
