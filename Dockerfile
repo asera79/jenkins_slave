@@ -14,10 +14,19 @@ RUN apk update && apk add --no-cache ca-certificates && \
     curl -fL -o docker.tgz "https://download.docker.com/linux/static/${DOCKER_CHANNEL}/x86_64/docker-${DOCKER_VERSION}.tgz" && \
     tar xzvf docker.tgz && mv ./docker /usr/lib/docker && \
     ln -s /usr/lib/docker/docker /usr/bin/docker && \
-    rm -rf /tmp/* && \
-    rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
+    rm -rf /tmp/*
+
+ADD docker /usr/lib/docker
+
+RUN chmod +x /usr/lib/docker
 
 RUN apk add openssh sudo
+
+RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
+
+RUN adduser -D -s /bin/sh -h /home/jenkins -g "" jenkins && echo "jenkins:jenkins" | chpasswd
+
+ADD jenkins_sudo /etc/sudoers.d/jenkins
 
 EXPOSE 22
 ENTRYPOINT ["docker-entrypoint.sh"]
