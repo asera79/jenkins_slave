@@ -13,12 +13,11 @@ RUN apk update && apk add --no-cache ca-certificates && \
     cd /tmp && \
     curl -fL -o docker.tgz "https://download.docker.com/linux/static/${DOCKER_CHANNEL}/x86_64/docker-${DOCKER_VERSION}.tgz" && \
     tar xzvf docker.tgz && mv ./docker /usr/lib/docker && \
-    ln -s /usr/lib/docker/docker /usr/bin/docker && \
     rm -rf /tmp/*
 
-ADD docker /usr/lib/docker
+ADD docker /usr/bin/docker
 
-RUN chmod +x /usr/lib/docker
+RUN chmod +x /usr/bin/docker
 
 RUN apk add openssh sudo
 
