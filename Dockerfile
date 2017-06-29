@@ -19,7 +19,7 @@ ADD docker /usr/bin/docker
 
 RUN chmod +x /usr/bin/docker
 
-RUN apk add openssh sudo
+RUN apk add openssh sudo git
 
 RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 
