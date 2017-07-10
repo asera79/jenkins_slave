@@ -27,6 +27,10 @@ RUN adduser -D -s /bin/sh -h /var/jenkins -g "" jenkins && echo "jenkins:jenkins
 
 ADD jenkins_sudo /etc/sudoers.d/jenkins
 
+ADD ssh/ssh_host_dsa_key /etc/ssh/
+ADD ssh/ssh_host_dsa_key.pub /etc/ssh/
+ADD ssh/ssh_host_rsa_key /etc/ssh/
+ADD ssh/ssh_host_rsa_key.pub /etc/ssh/
+
 EXPOSE 22
-ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/usr/sbin/sshd","-D"]
