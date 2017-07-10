@@ -30,7 +30,7 @@ ADD ssh/ssh_host_dsa_key.pub /etc/ssh/
 ADD ssh/ssh_host_rsa_key /etc/ssh/
 ADD ssh/ssh_host_rsa_key.pub /etc/ssh/
 
-RUN cd /etc/ssh && chmod 600 ssh_host_dsa_key && chmod 600 ssh_host_rsa_key chmod 644 *.pub 
+RUN cd /etc/ssh && chmod 600 ssh_host_dsa_key && chmod 600 ssh_host_rsa_key && chmod 644 *.pub 
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd","-D"]
