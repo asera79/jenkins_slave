@@ -5,8 +5,6 @@ MAINTAINER asera79@gmail.com
 ENV DOCKER_CHANNEL edge
 ENV DOCKER_VERSION 17.05.0-ce
 
-ADD docker-entrypoint.sh /usr/local/bin
-
 RUN apk update && apk add --no-cache ca-certificates && \
     set -ex && \
     apk add --no-cache --virtual .fetch-deps curl tar && \
