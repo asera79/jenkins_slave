@@ -21,7 +21,7 @@ RUN apk add openssh sudo git
 
 RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 
-RUN adduser -D -s /bin/sh -h /var/jenkins -g "" jenkins && echo "jenkins:jenkins" | chpasswd
+RUN adduser -D -s /bin/sh -h /var/jenkins -g "" -u 1000 jenkins && echo "jenkins:jenkins" | chpasswd
 
 ADD jenkins_sudo /etc/sudoers.d/jenkins
 
